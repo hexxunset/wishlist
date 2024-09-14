@@ -30,10 +30,6 @@ public class CustomUserDetails implements UserDetails {
         return friendsUsernames;
     }
 
-    public void setFriendsUsernames(String friendsUsernames) {
-        this.friendsUsernames = friendsUsernames;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
