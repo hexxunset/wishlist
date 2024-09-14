@@ -30,7 +30,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
         ).formLogin(login ->
                 login.usernameParameter("username")
-                        .defaultSuccessUrl("/users")
+                        .defaultSuccessUrl("/friends")
                         .permitAll()
         ).logout(logout -> logout.logoutSuccessUrl("/").permitAll()
         );
