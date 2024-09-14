@@ -1,14 +1,11 @@
 package com.example.hmg.wishlistBE.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,14 +19,14 @@ import com.example.hmg.wishlistBE.dto.UserDto;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class UserController {
+public class AppController {
 
     @Autowired
     private UserDetailsService userDetailsService;
 
     private UserService userService;
 
-    public UserController(UserService userService) {
+    public AppController(UserService userService) {
         this.userService = userService;
     }
 
