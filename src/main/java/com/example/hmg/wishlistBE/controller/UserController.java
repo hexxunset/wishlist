@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.hmg.wishlistBE.entity.User;
 import com.example.hmg.wishlistBE.service.UserService;
 import com.example.hmg.wishlistBE.dto.UserDto;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -60,8 +61,7 @@ public class UserController {
     }
 
     @PostMapping("/add-friend")
-    public String addFriend(Principal principal) {
-        String newFriend = "test1";
+    public String addFriend(@RequestParam String newFriend, Principal principal) {
         System.out.println(("Adding friend "+newFriend+" for user "+principal.getName()));
         User user = userService.findByUsername(principal.getName());
         UserDto userDto = new UserDto(user.getUsername(), user.getPassword(), user.getName(), user.getFriendsUsernames());
@@ -75,7 +75,7 @@ public class UserController {
         System.out.println(friends);
         userDto.setFriendsUsernames(friends);
         userService.update(user.getId(), userDto);
-        return "friend_added";
+        return "redirect:/users?success";
     }
 
     @PostMapping("/register")
