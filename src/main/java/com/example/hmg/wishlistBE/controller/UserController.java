@@ -70,16 +70,18 @@ public class UserController {
     }
 
     @PostMapping("/add-friend")
-    public String addFriend(@RequestParam String newFriend, Principal principal) {
-        System.out.println(("Adding friend "+newFriend+" for user "+principal.getName()));
+    public String addFriend(@RequestParam String newFriendUsername, Principal principal) {
+        System.out.println(("Adding friend "+newFriendUsername+" for user "+principal.getName()));
+        // Check that friend exists
+        User friend = userService.findByUsername(newFriendUsername);
         User user = userService.findByUsername(principal.getName());
         UserDto userDto = new UserDto(user.getUsername(), user.getPassword(), user.getName(), user.getFriendsUsernames());
         String friends = userDto.getFriendsUsernames();
         System.out.println(friends);
         if (friends == null) {
-            friends = newFriend;
+            friends = friend.getUsername();
         } else {
-            friends = friends + ", " + newFriend;
+            friends = friends + ", " + friend.getUsername();
         }
         System.out.println(friends);
         userDto.setFriendsUsernames(friends);
