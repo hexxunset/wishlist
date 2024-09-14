@@ -1,8 +1,10 @@
 package com.example.hmg.wishlistBE.service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
 
+import com.example.hmg.wishlistBE.entity.User;
 import com.example.hmg.wishlistBE.entity.Wish;
 import com.example.hmg.wishlistBE.repository.WishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +33,20 @@ public class WishServiceImpl implements WishService {
     }
 
     @Override
-    public List<Wish> fetchWishList(Long personId) {
+    public List<Wish> fetchWishList(User user, Principal principal) {
         System.out.println("Welcome to fetch user's wishlist");
         // Retrieves and returns a list of all wish entities.
         List<Wish> allWishes = wishRepository.findAll();
         List<Wish> userWishes = allWishes.stream()
 //                .map(Wish::getPersonId)
-                .filter(l -> l.getPersonId().equals(personId)
+                .filter(l -> l.getPersonId().equals(user.getId())
                 ) // here
                 .toList();
         System.out.println(userWishes);
+        // Remove information about if the wish has been bought if it's the user's own wish (no spoilers!)
+        if (user.getUsername().equals(principal.getName())) {
+            userWishes.forEach(wish -> wish.setWishNumberBought(null));
+        }
         return userWishes;
     }
 

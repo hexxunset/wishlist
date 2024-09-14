@@ -28,7 +28,7 @@
           <li th:text="${wish.wishName}"></li>
           <form th:action="@{/buy-wish}" method="post">
             <input type="hidden" th:value="${wish.id}" name="wishId"><br>
-            <button type="submit">Registrer kjøp av ønske</button>
+            <button th:disabled="${wish.wishNumberBought} > 0" type="submit">Registrer kjøp av ønske</button>
           </form>
         </ul>
       </ul>

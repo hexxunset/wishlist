@@ -1,6 +1,9 @@
 package com.example.hmg.wishlistBE.service;
 
+import com.example.hmg.wishlistBE.entity.User;
 import com.example.hmg.wishlistBE.entity.Wish;
+
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -21,7 +24,7 @@ public interface WishService {
      */
     List<Wish> fetchWishList();
 
-    List<Wish> fetchWishList(Long personId);
+    List<Wish> fetchWishList(User user, Principal principal);
 
     /**
      * Updates an existing Wish entity.

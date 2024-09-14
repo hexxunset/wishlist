@@ -28,6 +28,6 @@ public class RestAppController {
         // Get info on the current user (need the userId to find wishes the user has made)
         User user = userService.findByUsername(principal.getName());
         // Grab wishes filtered by userId
-        return wishService.fetchWishList(user.getId());
+        return wishService.fetchWishList(user, principal);
     }
 }

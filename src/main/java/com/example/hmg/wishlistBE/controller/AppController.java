@@ -68,7 +68,7 @@ public class AppController {
         List<UserWishes> friendsWishes = new ArrayList<>();
         for (Follows row : userFollows) {
             User friend = userService.findByUsername(row.getFollowsUsername());
-            List<Wish> friendWishes = wishService.fetchWishList(friend.getId());
+            List<Wish> friendWishes = wishService.fetchWishList(friend, principal);
             System.out.println("grabbed wishes friend " + friend.getName() + " has made");
             System.out.println(friendWishes);
             UserWishes friendWishesStructured = new UserWishes(friend.getId(), friend.getUsername(), friend.getName(), friendWishes);
@@ -88,7 +88,7 @@ public class AppController {
         // Get info on the current user (need the userId to find wishes the user has made)
         User user = userService.findByUsername(principal.getName());
         // Grab wishes filtered by userId
-        List<Wish> wishes = wishService.fetchWishList(user.getId());
+        List<Wish> wishes = wishService.fetchWishList(user, principal);
         // Add user and wishes to model to show userinfo, and the users wishes
         model.addAttribute("user", user);
         model.addAttribute("wishes", wishes);
@@ -111,6 +111,7 @@ public class AppController {
 
     @PostMapping("/buy-wish")
     public String buyWish(@RequestParam String wishId) {
+        // TODO: Stop someone from buying a wish if it's already been bought
         wishService.incrementWishBoughtNumber(Long.valueOf(wishId));
         return "redirect:/friends?success";
     }
