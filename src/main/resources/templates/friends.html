@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"><head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="nb"><head>
   <meta charset="ISO-8859-1">
-  <title>List Users</title>
+  <title>Venners ønskelister</title>
 </head>
 <body>
 <div class="container text-center">
+  <a th:href="@{wishlist}">Min ønskeliste</a>
   <div>
     <form th:action="@{/logout}" method="post">
       <p>
