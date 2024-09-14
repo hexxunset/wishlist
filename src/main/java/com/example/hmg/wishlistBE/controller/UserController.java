@@ -33,6 +33,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/friends";
+    }
+
     @GetMapping("/home")
     public String home(Model model, Principal principal) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -53,7 +58,7 @@ public class UserController {
         return "register";
     }
 
-    @GetMapping("/users")
+    @GetMapping("/friends")
     public String listUsers(Model model, Principal principal) {
 //        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         //UserDetails friendDetails = userDetailsService.loadUserByUsername(userDetails.get)
@@ -68,7 +73,7 @@ public class UserController {
         Set<String> friends = new HashSet<>(Arrays.asList(friendsArr));
         System.out.println(friends);
         model.addAttribute("friends", friends);
-        return "users";
+        return "friends";
     }
 
     @PostMapping("/add-friend")
@@ -86,7 +91,7 @@ public class UserController {
         System.out.println(friends);
         userDto.setFriendsUsernames(friends);
         userService.update(user.getId(), userDto);
-        return "redirect:/users?success";
+        return "redirect:/friends?success";
     }
 
     @PostMapping("/register")
