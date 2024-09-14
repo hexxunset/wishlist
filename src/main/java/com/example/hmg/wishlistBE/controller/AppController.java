@@ -3,6 +3,7 @@ package com.example.hmg.wishlistBE.controller;
 import java.security.Principal;
 import java.util.*;
 
+import com.example.hmg.wishlistBE.dto.UserWishes;
 import com.example.hmg.wishlistBE.entity.Follows;
 import com.example.hmg.wishlistBE.entity.Wish;
 import com.example.hmg.wishlistBE.service.FollowsService;
@@ -64,6 +65,21 @@ public class AppController {
         List<Follows> userFollows = followsService.fetchFollowsList(user.getUsername());
         System.out.println(userFollows);
         model.addAttribute("friends", userFollows);
+        // Fetch wishes made by everyone the user follows
+        List<UserWishes> friendsWishes = new ArrayList<>();
+        for (Follows row : userFollows) {
+            User friend = userService.findByUsername(row.getFollowsUsername());
+            List<Wish> friendWishes = wishService.fetchWishList(friend.getId());
+            System.out.println("grabbed wishes friend " + friend.getName() + " has made");
+            System.out.println(friendWishes);
+            UserWishes friendWishesStructured = new UserWishes(friend.getId(), friend.getUsername(), friend.getName(), friendWishes);
+            friendsWishes.add(friendWishesStructured);
+        }
+        System.out.println("Fetched wishes for all of the users friends");
+        if (!friendsWishes.isEmpty()) {
+            System.out.println(friendsWishes);
+        }
+        model.addAttribute("friendsWishes", friendsWishes);
         return "friends";
     }
 

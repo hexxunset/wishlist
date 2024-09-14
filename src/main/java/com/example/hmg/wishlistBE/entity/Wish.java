@@ -50,4 +50,8 @@ public class Wish {
     public String getWishName() { return this.wishName; }
     public String getWishDescription() { return this.wishDescription; }
     public Integer getWishNumberBought() { return this.wishNumberBought; }
+
+    public String toString() {
+        return this.wishName;
+    }
 }

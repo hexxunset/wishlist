@@ -6,6 +6,4 @@ import com.example.hmg.wishlistBE.dto.UserDto;
 
 public interface UserRepository  extends JpaRepository<User, Long> {
     User findByUsername(String username);
-
-    User save(UserDto userDto);
 }
