@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -53,10 +55,19 @@ public class UserController {
 
     @GetMapping("/users")
     public String listUsers(Model model, Principal principal) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+//        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         //UserDetails friendDetails = userDetailsService.loadUserByUsername(userDetails.get)
-        model.addAttribute("userdetail", userDetails);
-        System.out.println(userDetails);
+        User user = userService.findByUsername(principal.getName());
+        model.addAttribute("user", user);
+        System.out.println(user);
+        System.out.println(user.getFriendsUsernames());
+        String[] friendsArr = {"No friends added"};
+        if (user.getFriendsUsernames() != null) {
+            friendsArr = user.getFriendsUsernames().split(", ");
+        }
+        Set<String> friends = new HashSet<>(Arrays.asList(friendsArr));
+        System.out.println(friends);
+        model.addAttribute("friends", friends);
         return "users";
     }
 
