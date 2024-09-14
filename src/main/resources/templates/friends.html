@@ -21,11 +21,6 @@
   </div>
   <div>
     <h1>My friends</h1>
-    <div th:if="${friends!=null and !friends.isEmpty()}">
-      <ul th:each="friend : ${friends}">
-        <li th:text="${friend.followsUsername}"></li>
-      </ul>
-    </div>
     <div th:if="${friendsWishes!=null and !friendsWishes.isEmpty()}">
       <ul th:each="userWish : ${friendsWishes}">
         <li th:text="${userWish.name}"></li>

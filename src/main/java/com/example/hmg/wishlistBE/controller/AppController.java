@@ -64,7 +64,6 @@ public class AppController {
         // Fetch who the user follows, and add it as an attribute to the model
         List<Follows> userFollows = followsService.fetchFollowsList(user.getUsername());
         System.out.println(userFollows);
-        model.addAttribute("friends", userFollows);
         // Fetch wishes made by everyone the user follows
         List<UserWishes> friendsWishes = new ArrayList<>();
         for (Follows row : userFollows) {
