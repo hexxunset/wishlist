@@ -3,8 +3,11 @@ package com.example.hmg.wishlistBE.controller;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import com.example.hmg.wishlistBE.entity.Wish;
+import com.example.hmg.wishlistBE.service.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
@@ -25,9 +28,11 @@ public class AppController {
     private UserDetailsService userDetailsService;
 
     private UserService userService;
+    private WishService wishService;
 
-    public AppController(UserService userService) {
+    public AppController(UserService userService, WishService wishService) {
         this.userService = userService;
+        this.wishService = wishService;
     }
 
     @GetMapping("/")
@@ -64,6 +69,19 @@ public class AppController {
         System.out.println(friends);
         model.addAttribute("friends", friends);
         return "friends";
+    }
+
+    @GetMapping("/wishlist")
+    public String viewWishlist(Model model, Principal principal) {
+        // Get the wishes for the current user by finding the usedId and filtering all wishes
+        // Get info on the current user (need the userId to find wishes the user has made)
+        User user = userService.findByUsername(principal.getName());
+        // Grab wishes filtered by userId
+        List<Wish> wishes = wishService.fetchWishList(user.getId());
+        // Add user and wishes to model to show userinfo, and the users wishes
+        model.addAttribute("user", user);
+        model.addAttribute("wishes", wishes);
+        return "wishlist";
     }
 
     @PostMapping("/add-friend")

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="nb"><head>
+  <meta charset="ISO-8859-1">
+  <title>My Wishlist</title>
+</head>
+<body>
+<div class="container text-center">
+  <div>
+    <form th:action="@{/logout}" method="post">
+      <p>
+      <h2 class="dashboard_user_name" th:text="${user.username}" ></h2>
+      </p>
+      <input type="submit" value="Sign Out" />
+    </form>
+    <form th:action="@{/add-wish}" method="post">
+      <label>Navn på ønske: <input type="text" name="newWishName"></label><br>
+      <label>Beskrivelse av ønske: <input type="text" name="newWishDescription"></label><br>
+      <button type="submit">Legg til ønske</button>
+    </form>
+    </form>
+  </div>
+  <div>
+    <h1>Mine ønsker</h1>
+    <ul th:each="wish : ${wishes}">
+      <li th:text="${wish.wishName}"></li>
+    </ul>
+    </tr>
+  </div>
+
+</div>
+</body>
+</html>

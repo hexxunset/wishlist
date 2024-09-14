@@ -21,6 +21,8 @@ public interface WishService {
      */
     List<Wish> fetchWishList();
 
+    List<Wish> fetchWishList(Long personId);
+
     /**
      * Updates an existing Wish entity.
      * @param Wish the Wish with updated information

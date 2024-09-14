@@ -26,8 +26,22 @@ public class WishServiceImpl implements WishService {
 
     @Override
     public List<Wish> fetchWishList() {
-        // Retrieves and returns a list of all wish entities.
+        // Retrieves and returns a list of all department entities.
         return (List<Wish>) wishRepository.findAll();
+    }
+
+    @Override
+    public List<Wish> fetchWishList(Long personId) {
+        System.out.println("Welcome to fetch user's wishlist");
+        // Retrieves and returns a list of all wish entities.
+        List<Wish> allWishes = wishRepository.findAll();
+        List<Wish> userWishes = allWishes.stream()
+//                .map(Wish::getPersonId)
+                .filter(l -> l.getPersonId().equals(personId)
+                ) // here
+                .toList();
+        System.out.println(userWishes);
+        return userWishes;
     }
 
     @Override
