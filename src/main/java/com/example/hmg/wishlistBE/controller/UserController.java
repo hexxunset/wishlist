@@ -38,13 +38,6 @@ public class UserController {
         return "redirect:/friends";
     }
 
-    @GetMapping("/home")
-    public String home(Model model, Principal principal) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("userdetail", userDetails);
-        return "home";
-    }
-
     @GetMapping("/login")
     public String login(Model model, UserDto userDto) {
 
