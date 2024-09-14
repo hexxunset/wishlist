@@ -2,25 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="nb"><head>
   <meta charset="ISO-8859-1">
   <title>Venners ønskelister</title>
+  <link th:href="@{/css/custom.css}" rel="stylesheet" />
 </head>
 <body>
-<div class="container text-center">
-  <a th:href="@{wishlist}">Min ønskeliste</a>
+<div>
   <div>
-    <form th:action="@{/logout}" method="post">
-      <p>
-      <h2 class="dashboard_user_name" th:text="${user.username}" ></h2>
-      </p>
+    <h2 th:text="${user.name}" ></h2>
+    <form th:action="@{/logout}" method="post" class="logout">
       <input type="submit" value="Sign Out" />
     </form>
-    <form th:action="@{/add-friend}" method="post">
-      <label>Friends username: <input type="text" name="newFriendUsername"></label><br>
-      <button type="submit">Add friend</button>
-    </form>
+    <form th:action="@{/wishlist}" method="get">
+      <button type="submit">Min ønskeliste</button>
     </form>
   </div>
   <div>
-    <h1>My friends</h1>
+    <h1>Mine venner</h1>
+    <div class="add-friend-wrapper">
+    <form th:action="@{/add-friend}" method="post">
+      <input type="text" placeholder="Vennens brukernavn" name="newFriendUsername"><br>
+    </form>
+      <button type="submit">Legg til venn</button>
+    </div>
     <div th:if="${friendsWishes!=null and !friendsWishes.isEmpty()}">
       <ul th:each="userWish : ${friendsWishes}">
         <li th:text="${userWish.name}"></li>

@@ -2,26 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="nb"><head>
   <meta charset="ISO-8859-1">
   <title>Min ønskeliste</title>
+  <link th:href="@{/css/custom.css}" rel="stylesheet" />
 </head>
 <body>
 <div class="container text-center">
-  <a th:href="@{friends}">Venners ønskelister</a>
   <div>
-    <form th:action="@{/logout}" method="post">
-      <p>
-      <h2 class="dashboard_user_name" th:text="${user.username}" ></h2>
-      </p>
+    <h2 class="dashboard_user_name" th:text="${user.name}" ></h2>
+    <form th:action="@{/logout}" method="post" class="logout">
       <input type="submit" value="Sign Out" />
     </form>
+    <form th:action="@{/friends}" method="get">
+      <button type="submit">Venners ønskelister</button>
+    </form>
+  </div>
+  <div>
+    <h1>Mine ønsker</h1>
     <form th:action="@{/add-wish}" method="post">
       <label>Navn på ønske: <input type="text" name="newWishName"></label><br>
       <label>Beskrivelse av ønske: <input type="text" name="newWishDescription"></label><br>
       <button type="submit">Legg til ønske</button>
     </form>
-    </form>
-  </div>
-  <div>
-    <h1>Mine ønsker</h1>
     <ul th:each="wish : ${wishes}">
       <li th:text="${wish.wishName}"></li>
     </ul>
