@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"><head>
+  <meta charset="ISO-8859-1">
+  <title>List Users</title>
+</head>
+<body>
+<div class="container text-center">
+  <div>
+    <form th:action="@{/logout}" method="post">
+      <p>
+      <h2 class="dashboard_user_name" th:text="${userdetail.name}"></h2>
+      </p>
+      <input type="submit" value="Sign Out" />
+    </form>
+    <form th:action="@{/add-friend}" method="post">
+      <input type="submit" value="Add friend" />
+    </form>
+  </div>
+  <div>
+    <h1>List of Users</h1>
+  </div>
+
+</div>
+</body>
+</html>
