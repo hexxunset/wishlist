@@ -15,14 +15,18 @@ public class Wish {
     private String wishName;
     @Column
     private String wishDescription;
+    @Column
+    private Integer wishNumberBought = 0;
+
 
     public Wish() {}
 
-    public Wish(Long personId, String wishName, String wishDescription) {
+    public Wish(Long personId, String wishName, String wishDescription, Integer wishNumberBought) {
         super();
         this.personId = personId;
         this.wishName = wishName;
         this.wishDescription = wishDescription;
+        this.wishNumberBought = wishNumberBought;
     }
 
     public void setPersonId(Long personId) {
@@ -37,8 +41,13 @@ public class Wish {
         this.wishDescription = wishDescription;
     }
 
+    public void setWishNumberBought(Integer wishNumberBought) {
+        this.wishNumberBought = wishNumberBought;
+    }
+
     public Long getId() { return this.id; }
     public Long getPersonId() { return this.personId; }
     public String getWishName() { return this.wishName; }
     public String getWishDescription() { return this.wishDescription; }
+    public Integer getWishNumberBought() { return this.wishNumberBought; }
 }

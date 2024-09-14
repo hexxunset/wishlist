@@ -59,6 +59,10 @@ public class WishServiceImpl implements WishService {
         if (Objects.nonNull(wish.getWishDescription()) && !"".equalsIgnoreCase(wish.getWishDescription())) {
             wishDB.setWishDescription(wish.getWishDescription());
         }
+        // WishNumberBought can't be null, but let's keep the check in case that changes
+        if (Objects.nonNull(wish.getWishNumberBought())) {
+            wishDB.setWishNumberBought(wish.getWishNumberBought());
+        }
 
         // Saves and returns the updated wish entity.
         return wishRepository.save(wishDB);

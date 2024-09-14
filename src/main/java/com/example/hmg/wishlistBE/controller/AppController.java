@@ -84,6 +84,20 @@ public class AppController {
         return "wishlist";
     }
 
+    @PostMapping("/add-wish")
+    public String addWish(@RequestParam String newWishName, @RequestParam(required = false) String newWishDescription, Principal principal) {
+        System.out.println(("Adding " + newWishName+" for user "+principal.getName()));
+        User user = userService.findByUsername(principal.getName());
+        Wish newWish = new Wish();
+        newWish.setPersonId(user.getId());
+        newWish.setWishName(newWishName);
+        if (newWishDescription != null) {
+            newWish.setWishDescription(newWishDescription);
+        }
+        wishService.saveWish(newWish);
+        return "redirect:/wishlist?success";
+    }
+
     @PostMapping("/add-friend")
     public String addFriend(@RequestParam String newFriendUsername, Principal principal) {
         System.out.println(("Adding friend "+newFriendUsername+" for user "+principal.getName()));
