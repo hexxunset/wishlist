@@ -1,0 +1,17 @@
+{
+  "test1": {
+    "id": 1,
+    "name": "Test 1",
+    "wishes": [
+      "bike",
+      "cat"
+    ]
+  },
+  "test2": {
+    "id": 2,
+    "name": "Test 2",
+    "wishes": [
+      "sweater"
+    ]
+  }
+}

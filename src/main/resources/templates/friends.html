@@ -21,9 +21,11 @@
   </div>
   <div>
     <h1>My friends</h1>
-    <ul th:each="friend : ${friends}">
-      <li th:text="${friend}"></li>
-    </ul>
+    <div th:if="${friends!=null and !friends.isEmpty()}">
+      <ul th:each="friend : ${friends}">
+        <li th:text="${friend.followsUsername}"></li>
+      </ul>
+    </div>
     </tr>
   </div>
 

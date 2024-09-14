@@ -2,8 +2,8 @@ package com.example.hmg.wishlistBE;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.hmg.wishlistBE.entity.User;
-import com.example.hmg.wishlistBE.repository.UserRepository;
+import com.example.hmg.wishlistBE.entity.Follows;
+import com.example.hmg.wishlistBE.repository.FollowsRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -14,26 +14,24 @@ import org.springframework.test.annotation.Rollback;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-@Rollback(true) // Uncomment if you want to store test data permanently
-public class UserRepositoryTests {
+@Rollback(true)
+public class FollowsRepositoryTests {
 
     @Autowired
     private TestEntityManager entityManager;
 
     @Autowired
-    private UserRepository repo;
+    private FollowsRepository repo;
 
     @Test
-    void testCreateUser() {
-        User user = new User();
-        user.setUsername("helle");
-        user.setPassword("myPass123!");
-        user.setName("Helle");
+    public void testCreateUser() {
+        Follows follows = new Follows("test1", "test2");
 
-        User savedUser = repo.save(user);
+        Follows savedFollows = repo.save(follows);
 
-        User existUser = entityManager.find(User.class, savedUser.getId());
+        Follows existFollows = entityManager.find(Follows.class, savedFollows.getId());
 
-        assertThat(user.getUsername()).isEqualTo(existUser.getUsername());
+        assertThat(follows.getId()).isEqualTo(existFollows.getId());
+
     }
 }

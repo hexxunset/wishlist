@@ -1,12 +1,11 @@
 package com.example.hmg.wishlistBE.controller;
 
 import java.security.Principal;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
+import com.example.hmg.wishlistBE.entity.Follows;
 import com.example.hmg.wishlistBE.entity.Wish;
+import com.example.hmg.wishlistBE.service.FollowsService;
 import com.example.hmg.wishlistBE.service.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,10 +28,12 @@ public class AppController {
 
     private UserService userService;
     private WishService wishService;
+    private FollowsService followsService;
 
-    public AppController(UserService userService, WishService wishService) {
+    public AppController(UserService userService, WishService wishService, FollowsService followsService) {
         this.userService = userService;
         this.wishService = wishService;
+        this.followsService = followsService;
     }
 
     @GetMapping("/")
@@ -55,19 +56,14 @@ public class AppController {
 
     @GetMapping("/friends")
     public String listUsers(Model model, Principal principal) {
-//        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        //UserDetails friendDetails = userDetailsService.loadUserByUsername(userDetails.get)
+        // Get user from the userservice, and add it as an attribute to the model
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         System.out.println(user);
-        System.out.println(user.getFriendsUsernames());
-        String[] friendsArr = {"No friends added"};
-        if (user.getFriendsUsernames() != null) {
-            friendsArr = user.getFriendsUsernames().split(", ");
-        }
-        Set<String> friends = new HashSet<>(Arrays.asList(friendsArr));
-        System.out.println(friends);
-        model.addAttribute("friends", friends);
+        // Fetch who the user follows, and add it as an attribute to the model
+        List<Follows> userFollows = followsService.fetchFollowsList(user.getUsername());
+        System.out.println(userFollows);
+        model.addAttribute("friends", userFollows);
         return "friends";
     }
 
@@ -100,21 +96,14 @@ public class AppController {
 
     @PostMapping("/add-friend")
     public String addFriend(@RequestParam String newFriendUsername, Principal principal) {
+        // TODO: make sure friend isn't added twice
         System.out.println(("Adding friend "+newFriendUsername+" for user "+principal.getName()));
-        // Check that friend exists
-        User friend = userService.findByUsername(newFriendUsername);
+        // Get user and friend details
         User user = userService.findByUsername(principal.getName());
-        UserDto userDto = new UserDto(user.getUsername(), user.getPassword(), user.getName(), user.getFriendsUsernames());
-        String friends = userDto.getFriendsUsernames();
-        System.out.println(friends);
-        if (friends == null) {
-            friends = friend.getUsername();
-        } else {
-            friends = friends + ", " + friend.getUsername();
-        }
-        System.out.println(friends);
-        userDto.setFriendsUsernames(friends);
-        userService.update(user.getId(), userDto);
+        User friend = userService.findByUsername(newFriendUsername);
+        // Create follows-object and save to DB
+        Follows follows = new Follows(user.getUsername(), friend.getUsername());
+        followsService.saveFollows(follows);
         return "redirect:/friends?success";
     }
 

@@ -2,8 +2,6 @@ package com.example.hmg.wishlistBE.entity;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "users")
 public class User {
@@ -20,9 +18,6 @@ public class User {
 
     @Column(nullable = false)
     private String name;
-
-    @Column
-    private String friendsUsernames;
 
     public User() {}
 
@@ -45,13 +40,8 @@ public class User {
         this.name = name;
     }
 
-    public void setFriendsUsernames(String friendsUsernames) {
-        this.friendsUsernames = friendsUsernames;
-    }
-
     public Long getId() { return this.id; }
     public String getUsername() { return this.username; }
     public String getPassword() { return this.password; }
     public String getName() {return this.name; }
-    public String getFriendsUsernames() {return this.friendsUsernames; }
 }

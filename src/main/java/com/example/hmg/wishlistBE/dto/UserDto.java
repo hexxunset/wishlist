@@ -1,20 +1,18 @@
 package com.example.hmg.wishlistBE.dto;
 
-import java.util.List;
-
 public class UserDto {
 
     private String username;
     private String password;
     private String name;
-    private String friendsUsernames;
+    private UserWishes friendsWishes;
 
-    public UserDto(String username, String password, String name, String friendsUsernames) {
+    public UserDto(String username, String password, String name, UserWishes friendsWishes) {
         super();
         this.username = username;
         this.password = password;
         this.name = name;
-        this.friendsUsernames = friendsUsernames;
+        this.friendsWishes = friendsWishes;
     }
 
     public String getUsername() {
@@ -41,12 +39,12 @@ public class UserDto {
         this.name = name;
     }
 
-    public void setFriendsUsernames(String friendsUsernames) {
-        this.friendsUsernames = friendsUsernames;
+    public void setFriendsWishes(UserWishes friendsWishes) {
+        this.friendsWishes = friendsWishes;
     }
 
-    public String getFriendsUsernames() {
-        return this.friendsUsernames;
+    public UserWishes getFriendsWishes() {
+        return this.friendsWishes;
     }
 
     @Override

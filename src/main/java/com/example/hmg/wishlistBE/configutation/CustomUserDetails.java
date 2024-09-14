@@ -1,6 +1,5 @@
 package com.example.hmg.wishlistBE.configutation;
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,23 +10,17 @@ public class CustomUserDetails implements UserDetails {
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
     private String name;
-    private String friendsUsernames;
 
     public CustomUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities,
-                             String name, String friendsUsernames) {
+                             String name) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.name = name;
-        this.friendsUsernames = friendsUsernames;
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getFriendsUsernames() {
-        return friendsUsernames;
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.example.hmg.wishlistBE.service;
 
 import com.example.hmg.wishlistBE.entity.User;
 import com.example.hmg.wishlistBE.dto.UserDto;
-import org.springframework.stereotype.Service;
 
 public interface UserService {
     /**

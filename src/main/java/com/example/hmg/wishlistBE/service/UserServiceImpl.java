@@ -1,6 +1,5 @@
 package com.example.hmg.wishlistBE.service;
 
-import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -8,9 +7,6 @@ import com.example.hmg.wishlistBE.entity.User;
 import com.example.hmg.wishlistBE.dto.UserDto;
 import com.example.hmg.wishlistBE.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -45,9 +41,9 @@ public class UserServiceImpl implements UserService {
 //        if (Objects.nonNull(userDto.getName()) && !"".equalsIgnoreCase(userDB.getName())) {
 //            userDB.setName(userDto.getName());
 //        }
-        if (Objects.nonNull(userDto.getFriendsUsernames()) && !"".equalsIgnoreCase(userDB.getFriendsUsernames())) {
-            userDB.setFriendsUsernames(userDto.getFriendsUsernames());
-        }
+//        if (Objects.nonNull(userDto.getFriendsWishes()) && !"".equalsIgnoreCase(userDB.getFriendsUsernames())) {
+//            userDB.setFriendsUsernames(userDto.getFriendsWishes());
+//        }
         return userRepo.save(userDB);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.hmg.wishlistBE.configutation;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,11 +29,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         System.out.println("User: ");
         System.out.println(user.getName());
         System.out.println(user.getUsername());
-        System.out.println(user.getFriendsUsernames());
         if (user == null) {
             throw new UsernameNotFoundException("Username or Password not found");
         }
-        return new CustomUserDetails(user.getUsername(), user.getPassword(), authorities(), user.getName(), user.getFriendsUsernames());
+        return new CustomUserDetails(user.getUsername(), user.getPassword(), authorities(), user.getName());
     }
 
     public Collection<? extends GrantedAuthority> authorities() {
