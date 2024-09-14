@@ -69,6 +69,13 @@ public class WishServiceImpl implements WishService {
     }
 
     @Override
+    public Wish incrementWishBoughtNumber(Long wishId) {
+        Wish wishDB = wishRepository.findById(wishId).get();
+        wishDB.setWishNumberBought(wishDB.getWishNumberBought()+1);
+        return wishRepository.save(wishDB);
+    }
+
+    @Override
     public void deleteWishById(Long wishId) {
         // Deletes the wish entity by its ID.
         wishRepository.deleteById(wishId);

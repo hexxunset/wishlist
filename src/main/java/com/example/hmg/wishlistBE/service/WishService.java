@@ -31,6 +31,8 @@ public interface WishService {
      */
     Wish updateWish(Wish Wish, Long wishId);
 
+    Wish incrementWishBoughtNumber(Long wishId);
+
     /**
      * Deletes a Wish entity by its ID.
      * @param wishId the ID of the Wish to delete

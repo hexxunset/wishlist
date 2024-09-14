@@ -109,6 +109,12 @@ public class AppController {
         return "redirect:/wishlist?success";
     }
 
+    @PostMapping("/buy-wish")
+    public String buyWish(@RequestParam String wishId) {
+        wishService.incrementWishBoughtNumber(Long.valueOf(wishId));
+        return "redirect:/friends?success";
+    }
+
     @PostMapping("/add-friend")
     public String addFriend(@RequestParam String newFriendUsername, Principal principal) {
         // TODO: make sure friend isn't added twice
