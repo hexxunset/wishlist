@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
+/**
+ * Provides business logic for handling follow-related operations
+ */
 @Service
 public class FollowsServiceImpl implements FollowsService {
     @Autowired
@@ -15,13 +17,16 @@ public class FollowsServiceImpl implements FollowsService {
 
     @Override
     public Follows saveFollows(Follows follows) {
-        // Saves and returns the wish entity.
+        // Saves and returns the follow entity.
         return followsRepository.save(follows);
     }
 
+    /**
+     * Fetch everyone a user follows
+     */
     @Override
     public List<Follows> fetchFollowsList(String personUsername) {
-        System.out.println("Welcome to fetch user's followers");
+        System.out.println("Welcome to fetch user's followings");
         // Retrieves and returns a list of everyone the user follows
         List<Follows> allFollows = followsRepository.findAll();
         System.out.println("Grabbed all followsRows");
@@ -34,19 +39,4 @@ public class FollowsServiceImpl implements FollowsService {
         System.out.println(userFollows);
         return userFollows;
     }
-
-//    @Override
-//    public List<UserDto> mapFollowsToUserDto(Follows follows) {
-//        Long personId = follows.getPersonId();
-//        List<Follows> userFollows = fetchFollowsList(personId);
-//        List<UserWishes> userWishes;
-//        for (Follows row : userFollows) {
-//            User followsUser =
-//            String followsUsername =
-//            userWishes.add(row.getFollowsId(), row.)
-//        }
-////        List<UserWishes> friendsWishes = userFollows.stream()
-////                .map(follows -> new UserWishes(follows.getFollowsId(), )
-////                        follows.getPersonId())
-//    }
 }

@@ -27,30 +27,6 @@ public class WishServiceImpl implements WishService {
     }
 
     @Override
-    public List<Wish> fetchWishList() {
-        // Retrieves and returns a list of all department entities.
-        return (List<Wish>) wishRepository.findAll();
-    }
-
-    @Override
-    public List<Wish> fetchWishList(User user, Principal principal) {
-        System.out.println("Welcome to fetch user's wishlist");
-        // Retrieves and returns a list of all wish entities.
-        List<Wish> allWishes = wishRepository.findAll();
-        List<Wish> userWishes = allWishes.stream()
-//                .map(Wish::getPersonId)
-                .filter(l -> l.getPersonId().equals(user.getId())
-                ) // here
-                .toList();
-        System.out.println(userWishes);
-        // Remove information about if the wish has been bought if it's the user's own wish (no spoilers!)
-        if (user.getUsername().equals(principal.getName())) {
-            userWishes.forEach(wish -> wish.setWishNumberBought(null));
-        }
-        return userWishes;
-    }
-
-    @Override
     public Wish updateWish(Wish wish, Long wishId) {
         // Finds the existing wish by ID.
         Wish wishDB = wishRepository.findById(wishId).get();
@@ -75,15 +51,50 @@ public class WishServiceImpl implements WishService {
     }
 
     @Override
+    public void deleteWishById(Long wishId) {
+        // Deletes the wish entity by its ID.
+        wishRepository.deleteById(wishId);
+    }
+
+    /**
+     * Increases the number of a wish that has been bought by 1
+     */
+    @Override
     public Wish incrementWishBoughtNumber(Long wishId) {
+        System.out.println("incrementing wish with id " + wishId);
         Wish wishDB = wishRepository.findById(wishId).get();
         wishDB.setWishNumberBought(wishDB.getWishNumberBought()+1);
         return wishRepository.save(wishDB);
     }
 
+    /**
+     * Fetches the list of all Wish entities.
+     */
     @Override
-    public void deleteWishById(Long wishId) {
-        // Deletes the wish entity by its ID.
-        wishRepository.deleteById(wishId);
+    public List<Wish> fetchWishList() {
+        // Retrieves and returns a list of all department entities.
+        return (List<Wish>) wishRepository.findAll();
+    }
+
+    /**
+     * Fetches the list of Wishes made by user
+     * If the current user is the user who made the wish, wishNumberBought is redacted
+     */
+    @Override
+    public List<Wish> fetchWishList(User user, Principal principal) {
+        System.out.println("Welcome to fetch user's wishlist");
+        // Retrieves and returns a list of all wish entities.
+        List<Wish> allWishes = wishRepository.findAll();
+        List<Wish> userWishes = allWishes.stream()
+//                .map(Wish::getPersonId)
+                .filter(l -> l.getPersonId().equals(user.getId())
+                ) // here
+                .toList();
+        System.out.println(userWishes);
+        // Remove information about if the wish has been bought if it's the user's own wish (no spoilers!)
+        if (user.getUsername().equals(principal.getName())) {
+            userWishes.forEach(wish -> wish.setWishNumberBought(null));
+        }
+        return userWishes;
     }
 }

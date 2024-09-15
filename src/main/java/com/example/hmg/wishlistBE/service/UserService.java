@@ -3,6 +3,9 @@ package com.example.hmg.wishlistBE.service;
 import com.example.hmg.wishlistBE.entity.User;
 import com.example.hmg.wishlistBE.dto.UserDto;
 
+/**
+ * Defines methods for CRUD operations and additional business logic.
+ */
 public interface UserService {
     /**
      * Finds a user
@@ -17,7 +20,5 @@ public interface UserService {
      * @return the saved user
      */
     User save(UserDto userDto);
-
-    User update(Long userId, UserDto userDto);
 
 }

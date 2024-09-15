@@ -7,24 +7,13 @@ import java.security.Principal;
 import java.util.List;
 
 /**
- * Service interface for Wish entity.
  * Defines methods for CRUD operations and additional business logic.
  */
 public interface WishService {
     /**
-     * Saves a Wish entity.
-     * @param Wish the Wish to save
-     * @return the saved Wish
+     * Saves a wish
      */
     Wish saveWish(Wish Wish);
-
-    /**
-     * Fetches the list of all Wish entities.
-     * @return a list of wish
-     */
-    List<Wish> fetchWishList();
-
-    List<Wish> fetchWishList(User user, Principal principal);
 
     /**
      * Updates an existing Wish entity.
@@ -34,12 +23,26 @@ public interface WishService {
      */
     Wish updateWish(Wish Wish, Long wishId);
 
-    Wish incrementWishBoughtNumber(Long wishId);
-
     /**
      * Deletes a Wish entity by its ID.
      * @param wishId the ID of the Wish to delete
      */
     void deleteWishById(Long wishId);
+
+    /**
+     * Increases the number of a wish that has been bought by 1
+     */
+    Wish incrementWishBoughtNumber(Long wishId);
+
+    /**
+     * Fetches the list of all Wish entities.
+     */
+    List<Wish> fetchWishList();
+
+    /**
+     * Fetches the list of Wishes made by user
+     * If the current user is the user who made the wish, wishNumberBought is redacted
+     */
+    List<Wish> fetchWishList(User user, Principal principal);
 
 }
