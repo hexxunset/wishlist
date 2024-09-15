@@ -26,6 +26,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/register").permitAll()
+                        .requestMatchers("/rest/wishlist").permitAll()
+                        .requestMatchers("/rest/buy-wish").permitAll()
                         .anyRequest().authenticated()
         ).formLogin(login ->
                 login.usernameParameter("username")
