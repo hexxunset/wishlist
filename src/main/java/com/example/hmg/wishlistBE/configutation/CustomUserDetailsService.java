@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import com.example.hmg.wishlistBE.entity.User;
 import com.example.hmg.wishlistBE.repository.UserRepository;
 
+/**
+ * CustomUserDetailsService, used by Spring Security to look-up a CustomUserDetail during authentication process
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 

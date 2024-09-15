@@ -4,6 +4,9 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+/**
+ * CustomUserDetails, invoked by Spring Security during authentication process
+ */
 public class CustomUserDetails implements UserDetails {
 
     private String username;
