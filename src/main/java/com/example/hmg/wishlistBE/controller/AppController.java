@@ -38,11 +38,17 @@ public class AppController {
     }
 
     @GetMapping("/")
+    /*
+    * Redirects to the main page - the list of friends and their wishlists
+    */
     public String index() {
         return "redirect:/friends";
     }
 
     @GetMapping("/login")
+    /*
+    * Login
+    */
     public String login(Model model, UserDto userDto) {
 
         model.addAttribute("user", userDto);
@@ -50,12 +56,20 @@ public class AppController {
     }
 
     @GetMapping("/register")
+    /*
+     * Register new user
+     */
     public String register(Model model, UserDto userDto) {
         model.addAttribute("user", userDto);
         return "register";
     }
 
     @GetMapping("/friends")
+    /*
+     * The main page of the application
+     * Shows information about the logged in user (username), their friends, and the friends wishlists
+     * Also lets users add new friends
+     */
     public String listUsers(Model model, Principal principal) {
         // Get user from the userservice, and add it as an attribute to the model
         User user = userService.findByUsername(principal.getName());
@@ -83,6 +97,11 @@ public class AppController {
     }
 
     @GetMapping("/wishlist")
+    /*
+     * Logged in user's wishlist
+     * Shows all wishes made by the user (wishBought redacted)
+     * Also lets user add new wishes
+     */
     public String viewWishlist(Model model, Principal principal) {
         // Get the wishes for the current user by finding the usedId and filtering all wishes
         // Get info on the current user (need the userId to find wishes the user has made)
@@ -96,6 +115,10 @@ public class AppController {
     }
 
     @PostMapping("/add-wish")
+    /*
+     * Adds a new wish made by the logged in user
+     */
+    // TODO: Use Wish as input
     public String addWish(@RequestParam String newWishName, @RequestParam(required = false) String newWishDescription, Principal principal) {
         System.out.println(("Adding " + newWishName+" for user "+principal.getName()));
         User user = userService.findByUsername(principal.getName());
@@ -110,13 +133,19 @@ public class AppController {
     }
 
     @PostMapping("/buy-wish")
+    /*
+     * Marks a wish as bought
+     */
     public String buyWish(@RequestParam String wishId) {
-        // TODO: Stop someone from buying a wish if it's already been bought
+        // TODO: Stop someone from buying a wish if it's already been bought (currently only done in FE)
         wishService.incrementWishBoughtNumber(Long.valueOf(wishId));
         return "redirect:/friends?success";
     }
 
     @PostMapping("/add-friend")
+    /*
+     * Adds friend by username for the logged in user
+     */
     public String addFriend(@RequestParam String newFriendUsername, Principal principal) {
         // TODO: make sure friend isn't added twice
         System.out.println(("Adding friend "+newFriendUsername+" for user "+principal.getName()));
@@ -130,6 +159,9 @@ public class AppController {
     }
 
     @PostMapping("/register")
+    /*
+     * Registers a user to the DB
+     */
     public String registerSava(@ModelAttribute("user") UserDto userDto, Model model) {
         User user = userService.findByUsername(userDto.getUsername());
         if (user != null) {
