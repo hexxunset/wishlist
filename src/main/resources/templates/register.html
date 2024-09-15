@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Registration</title>
+    <title>Ønskelista</title>
     <style>
         body {
          font-family: 'Arial', sans-serif;
@@ -80,30 +80,30 @@ button {
 
     <div th:if="${param.success}">
         <div class="success-message">
-            <p>Registration Successful!</p>
+            <p>Suksess! Du kan nå logge inn.</p>
         </div>
     </div>
-    <h2>Registration</h2>
+    <h2>Registrering</h2>
     <form th:action="@{/register}" method="post" role="form" th:object="${user}">
-        <label for="name">Name:</label>
+        <label for="name">Navn:</label>
         <input th:field="*{name}" type="text" id="name" name="name" placeholder="Enter your Name"
                required>
 
-        <label for="username">Username:</label>
+        <label for="username">Brukernavn:</label>
         <input th:field="*{username}" type="text" id="username" name="username" placeholder="Enter your Username"
                required>
 
-        <label for="password">Password:</label>
+        <label for="password">Passord:</label>
         <input th:field="*{password}" type="password" id="password" name="password"
                placeholder="Enter your Password" required>
 
-        <button type="submit">Register</button>
+        <button type="submit">Registrer</button>
     </form>
     <div>
-        <span th:if="${Userexist}" style="color: red;">Username is Taken</span>
+        <span th:if="${Userexist}" style="color: red;">Brukernavnet er opptatt. Prøv et annet brukernavn.</span>
     </div>
     <div>
-        <span class="form-footer">Already have an account? <a th:href="@{/login}">Login</a>here.</span>
+        <span class="form-footer">Har du allerede en konto? <a th:href="@{/login}">Logg inn</a> her.</span>
     </div>
 </div>
 </body>

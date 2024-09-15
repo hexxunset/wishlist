@@ -1,28 +1,9 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="nb">-->
-<!--<head>-->
-<!--  <title>Ønskeliste </title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div th:if="${param.error}">-->
-<!--  Ugyldig brukernavn eller passord.-->
-<!--</div>-->
-<!--<div th:if="${param.logout}">-->
-<!--  Du har blitt logget ut.-->
-<!--</div>-->
-<!--<form th:action="@{/login}" method="post">-->
-<!--  <div><label> User Name : <input type="text" name="username"/> </label></div>-->
-<!--  <div><label> Password: <input type="password" name="password"/> </label></div>-->
-<!--  <div><input type="submit" value="Sign In"/></div>-->
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="nb">
 
 <head>
   <meta charset="UTF-8">
-  <title>Login</title>
+  <title>Ønskelista</title>
   <style>
     body {
      font-family: 'Arial', sans-serif;
@@ -101,29 +82,29 @@
 
     <div th:if="${param.error}">
       <div class="error-message">
-        <p>Invalid Username or Password</p>
+        <p>Ugyldig brukernavn eller passord</p>
       </div>
     </div>
     <div th:if="${param.logout}">
       <div class="logout-message">
-        <p>Logout Successful!</p>
+        <p>Du er logget ut!</p>
       </div>
     </div>
 
     <h2>Login</h2>
     <form th:action="@{/login}" method="post" role="form" th:object="${user}">
 
-      <label for="username">Username:</label>
+      <label for="username">Brukernavn:</label>
       <input th:field="*{username}" type="text" id="username" name="username"
              placeholder="Enter your Username" required>
 
-      <label for="password">Password:</label>
+      <label for="password">Passord:</label>
       <input th:field="*{password}" type="password" id="password" name="password"
              placeholder="Enter your Password" required>
 
-      <button type="submit">Login</button>
+      <button type="submit">Logg inn</button>
     </form>
-    <p class="form-footer">Don't have an account? <a th:href="@{/register}">Register</a>here.</p>
+    <p class="form-footer">Har du ikke en konto? <a th:href="@{/register}">Register</a> her.</p>
   </div>
 </div>
 </body>
