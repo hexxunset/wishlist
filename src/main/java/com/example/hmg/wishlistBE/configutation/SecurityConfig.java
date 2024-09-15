@@ -22,6 +22,10 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    /*
+     * Allow anyone to access register and login page, so they can sign up/sign in to the application
+     * Allow anyone to access REST api while it's under development
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
@@ -40,6 +44,9 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /*
+    * Use Custom User Details for authentication (default Spring Security is temp User Details)
+    */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
