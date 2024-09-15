@@ -1,5 +1,9 @@
 package com.example.hmg.wishlistBE.dto;
 
+
+/**
+ * UserDTO, redundant. TODO: Remove, use User for login and registration instead
+ */
 public class UserDto {
 
     private String username;

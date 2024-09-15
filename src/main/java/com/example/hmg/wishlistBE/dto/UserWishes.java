@@ -5,6 +5,15 @@ import com.example.hmg.wishlistBE.entity.Wish;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * All wishes made by a users friend
+ *
+ * TODO: Improve object structure
+ * New object structure:
+ *  private List<User> friends;
+ *  private Hashmap<String, List<Wish>> friendsWishes;
+ */
+
 public class UserWishes {
     private Long userId;
     private String username;

@@ -21,6 +21,9 @@ import com.example.hmg.wishlistBE.service.UserService;
 import com.example.hmg.wishlistBE.dto.UserDto;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * MVC Controller: Routes requests to their appropriate views
+ */
 @Controller
 public class AppController {
 
