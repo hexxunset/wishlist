@@ -4,7 +4,6 @@ import com.example.hmg.wishlistBE.entity.User;
 import com.example.hmg.wishlistBE.entity.Wish;
 import com.example.hmg.wishlistBE.service.UserService;
 import com.example.hmg.wishlistBE.service.WishService;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -23,11 +22,14 @@ public class RestAppController {
     }
 
     @GetMapping("/rest/wishlist")
-    public  List<Wish> getRestWishList(Principal principal) {
-        // Get the wishes for the current user by finding the usedId and filtering all wishes
-        // Get info on the current user (need the userId to find wishes the user has made)
-        User user = userService.findByUsername(principal.getName());
-        // Grab wishes filtered by userId
-        return wishService.fetchWishList(user, principal);
+    public  List<Wish> restGetWishList() {
+        // Grab all wishes
+        return wishService.fetchWishList();
     }
+
+//    @PostMapping("/rest/buy-wish")
+//    public Wish restBuyWish(@RequestBody String wishId) {
+//        System.out.println("Welcome to rest buy wish");
+//        return wishService.incrementWishBoughtNumber(Long.valueOf(wishId));
+//    }
 }
