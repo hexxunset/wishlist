@@ -27,17 +27,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AppController {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     private UserService userService;
     private WishService wishService;
     private FollowsService followsService;
 
-    public AppController(UserService userService, WishService wishService, FollowsService followsService) {
+    public AppController(UserService userService, WishService wishService, FollowsService followsService, final UserDetailsService userDetailsService) {
         this.userService = userService;
         this.wishService = wishService;
         this.followsService = followsService;
+        this.userDetailsService = userDetailsService;
     }
 
     @GetMapping("/")

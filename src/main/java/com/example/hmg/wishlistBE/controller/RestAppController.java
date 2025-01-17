@@ -4,6 +4,7 @@ import com.example.hmg.wishlistBE.entity.User;
 import com.example.hmg.wishlistBE.entity.Wish;
 import com.example.hmg.wishlistBE.service.UserService;
 import com.example.hmg.wishlistBE.service.WishService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -22,14 +23,14 @@ public class RestAppController {
     }
 
     @GetMapping("/rest/wishlist")
-    public  List<Wish> restGetWishList() {
+    public ResponseEntity<List<Wish>> restGetWishList() {
         // Grab all wishes
-        return wishService.fetchWishList();
+        return ResponseEntity.ok(wishService.fetchWishList());
     }
 
-//    @PostMapping("/rest/buy-wish")
-//    public Wish restBuyWish(@RequestBody String wishId) {
-//        System.out.println("Welcome to rest buy wish");
-//        return wishService.incrementWishBoughtNumber(Long.valueOf(wishId));
-//    }
+    @PostMapping("/rest/buy-wish")
+    public ResponseEntity<Wish> restBuyWish(@RequestBody String wishId) {
+        System.out.println("Welcome to rest buy wish");
+        return ResponseEntity.ok(wishService.incrementWishBoughtNumber(Long.valueOf(wishId)));
+    }
 }

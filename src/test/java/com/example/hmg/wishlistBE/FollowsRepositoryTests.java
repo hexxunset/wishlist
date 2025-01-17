@@ -17,6 +17,7 @@ import org.springframework.test.annotation.Rollback;
 @Rollback(true)
 public class FollowsRepositoryTests {
 
+    // TODO: bytt ut alle autowired med final variabel og lag en konstruktør som setter this (se UserDetailService i AppController)
     @Autowired
     private TestEntityManager entityManager;
 
